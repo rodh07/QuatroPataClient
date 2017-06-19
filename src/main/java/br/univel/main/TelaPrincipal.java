@@ -25,6 +25,7 @@ import br.univel.EJBClient.RemoteEJBClient;
 import br.univel.bicho.Bicho;
 import br.univel.dao.bichoDao;
 import java.awt.Font;
+import java.awt.event.KeyAdapter;
 
 
 public class TelaPrincipal extends JFrame implements Serializable {
@@ -182,6 +183,20 @@ public class TelaPrincipal extends JFrame implements Serializable {
 		scrollPane.setViewportView(table);
 
 		btnNovo = new JButton("Novo");
+		btnNovo.addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyPressed(KeyEvent ke) {
+				
+				if (ke.getKeyCode() == KeyEvent.VK_ENTER) {
+
+					NovoCadastro();
+					txtNome.requestFocus();
+					txtEspecie.requestFocus();
+					txtDono.requestFocus();
+					txtEmail.requestFocus();
+				}
+			}
+		});
 		btnNovo.setMnemonic(KeyEvent.VK_N);
 		
 		btnNovo.addActionListener(new ActionListener() {
@@ -198,11 +213,23 @@ public class TelaPrincipal extends JFrame implements Serializable {
 		contentPane.add(btnNovo, gbc_btnNovo);
 
 		btnEdit = new JButton("Editar");
+		btnEdit.addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyPressed(KeyEvent e) {
+				
+				txtNome.requestFocus();
+			}
+		});
 		btnEdit.setMnemonic(KeyEvent.VK_E);
 		btnEdit.addActionListener(new ActionListener() {
 
 			public void actionPerformed(ActionEvent arg0) {
 
+				editar();
+
+			}
+
+			private void editar() {
 				try {
 					editID = (int) table.getModel().getValueAt(table.getSelectedRow(), 0);
 				} catch (Exception e) {
@@ -219,7 +246,6 @@ public class TelaPrincipal extends JFrame implements Serializable {
 				txtEmail.setText(animalEditar.getEmailDono());
 
 				selecaoBicho = animalEditar;
-
 			}
 		});
 		GridBagConstraints gbc_btnEdit = new GridBagConstraints();

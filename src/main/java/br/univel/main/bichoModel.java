@@ -15,7 +15,7 @@ public class bichoModel extends AbstractTableModel {
 
 	private ArrayList<Bicho> list;
 
-	public bichoModel(ArrayList bichos) {
+	public bichoModel(ArrayList<Bicho> bichos) {
 		this.list = bichos;
 	}
 
