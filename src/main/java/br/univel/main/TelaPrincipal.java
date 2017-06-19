@@ -6,6 +6,7 @@ import java.awt.GridBagLayout;
 import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.KeyEvent;
 import java.io.Serializable;
 
 import javax.swing.JButton;
@@ -38,13 +39,14 @@ public class TelaPrincipal extends JFrame implements Serializable {
 	private JButton btnExcluir;
 	private JButton btnEdit;
 	private JButton btnNovo;
-	private bichoDao dao;
-	private bichoModel bichoModel;
-	private Bicho selecaoBicho;
 	private int editID;
 	private JTextField txtEmail;
 	private JLabel lblEmail;
 	private JLabel lblCadastro;
+	
+	private bichoDao dao;
+	private bichoModel bichoModel;
+	private Bicho selecaoBicho;
 
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
@@ -75,13 +77,13 @@ public class TelaPrincipal extends JFrame implements Serializable {
 			e.printStackTrace();
 		}
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 450, 300);
+		setBounds(100, 100, 450, 369);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		GridBagLayout gbl_contentPane = new GridBagLayout();
 		gbl_contentPane.columnWidths = new int[] { 0, 217, 0, 0, 0, 0 };
-		gbl_contentPane.rowHeights = new int[] { 0, 0, 0, 0, 0, 0, 0, 0 };
+		gbl_contentPane.rowHeights = new int[] { 0, 37, 37, 37, 37, 0, 40, 0 };
 		gbl_contentPane.columnWeights = new double[] { 0.0, 1.0, 0.0, 0.0, 0.0, Double.MIN_VALUE };
 		gbl_contentPane.rowWeights = new double[] { 0.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, Double.MIN_VALUE };
 		contentPane.setLayout(gbl_contentPane);
@@ -180,6 +182,8 @@ public class TelaPrincipal extends JFrame implements Serializable {
 		scrollPane.setViewportView(table);
 
 		btnNovo = new JButton("Novo");
+		btnNovo.setMnemonic(KeyEvent.VK_N);
+		
 		btnNovo.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 
@@ -187,12 +191,14 @@ public class TelaPrincipal extends JFrame implements Serializable {
 			}
 		});
 		GridBagConstraints gbc_btnNovo = new GridBagConstraints();
+		gbc_btnNovo.fill = GridBagConstraints.VERTICAL;
 		gbc_btnNovo.insets = new Insets(0, 0, 0, 5);
 		gbc_btnNovo.gridx = 2;
 		gbc_btnNovo.gridy = 6;
 		contentPane.add(btnNovo, gbc_btnNovo);
 
 		btnEdit = new JButton("Editar");
+		btnEdit.setMnemonic(KeyEvent.VK_E);
 		btnEdit.addActionListener(new ActionListener() {
 
 			public void actionPerformed(ActionEvent arg0) {
@@ -217,12 +223,14 @@ public class TelaPrincipal extends JFrame implements Serializable {
 			}
 		});
 		GridBagConstraints gbc_btnEdit = new GridBagConstraints();
+		gbc_btnEdit.fill = GridBagConstraints.VERTICAL;
 		gbc_btnEdit.insets = new Insets(0, 0, 0, 5);
 		gbc_btnEdit.gridx = 3;
 		gbc_btnEdit.gridy = 6;
 		contentPane.add(btnEdit, gbc_btnEdit);
 
 		btnExcluir = new JButton("Excluir");
+		btnExcluir.setMnemonic(KeyEvent.VK_E);
 		btnExcluir.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 
@@ -252,6 +260,7 @@ public class TelaPrincipal extends JFrame implements Serializable {
 			}
 		});
 		GridBagConstraints gbc_btnExcluir = new GridBagConstraints();
+		gbc_btnExcluir.fill = GridBagConstraints.VERTICAL;
 		gbc_btnExcluir.gridx = 4;
 		gbc_btnExcluir.gridy = 6;
 		contentPane.add(btnExcluir, gbc_btnExcluir);
@@ -286,7 +295,7 @@ public class TelaPrincipal extends JFrame implements Serializable {
 
 				dao.criar(bicho);
 				clear();
-
+				
 				bichoModel = new bichoModel(dao.pegarTodos());
 				table.setModel(bichoModel);
 			}
